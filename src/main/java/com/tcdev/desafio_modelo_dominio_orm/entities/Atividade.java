@@ -3,7 +3,7 @@ package com.tcdev.desafio_modelo_dominio_orm.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_name")
+@Table(name = "tb_atividade")
 public class Atividade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,9 +13,11 @@ public class Atividade {
     private Double preco;
 
     @ManyToOne
-    private Atividade atividade;
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
-    public Atividade() {}
+    public Atividade() {
+    }
 
     public Atividade(Long id, String nome, String descricao, Double preco) {
         this.id = id;
@@ -54,6 +56,14 @@ public class Atividade {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override

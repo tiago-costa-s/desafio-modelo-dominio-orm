@@ -2,6 +2,9 @@ package com.tcdev.desafio_modelo_dominio_orm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_categoria")
 public class Categoria {
@@ -10,7 +13,11 @@ public class Categoria {
     private Long id;
     private String descricao;
 
-    public Categoria() {}
+    @OneToMany(mappedBy = "categoria")
+    private List<Atividade> atividades = new ArrayList<>();
+
+    public Categoria() {
+    }
 
     public Categoria(Long id, String descricao) {
         this.id = id;
@@ -31,6 +38,10 @@ public class Categoria {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
     }
 
     @Override
