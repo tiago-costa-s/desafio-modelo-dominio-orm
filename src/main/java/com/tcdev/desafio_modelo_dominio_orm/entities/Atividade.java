@@ -2,6 +2,9 @@ package com.tcdev.desafio_modelo_dominio_orm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_atividade")
 public class Atividade {
@@ -15,6 +18,9 @@ public class Atividade {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "atividade")
+    private List<Bloco> blocos = new ArrayList<>();
 
     public Atividade() {
     }
@@ -64,6 +70,10 @@ public class Atividade {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<Bloco> getBlocos() {
+        return blocos;
     }
 
     @Override
